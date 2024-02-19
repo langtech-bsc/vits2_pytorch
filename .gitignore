@@ -2,10 +2,12 @@ DUMMY1
 DUMMY2
 DUMMY3
 logs
+LJSpeech-cat
+filelists
 __pycache__
 .ipynb_checkpoints
 .*.swp
-
+*.sh
 build
 *.c
 monotonic_align/monotonic_align
