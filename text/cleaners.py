@@ -16,8 +16,8 @@ import re
 from unidecode import unidecode
 from phonemizer import phonemize
 from phonemizer.backend import EspeakBackend
-backend = EspeakBackend("en-us", preserve_punctuation=True, with_stress=True)
-
+backend = EspeakBackend("ca", preserve_punctuation=True, with_stress=True)
+backend_en = EspeakBackend("en-us", preserve_punctuation=True, with_stress=True)
 
 # Regular expression matching whitespace:
 _whitespace_re = re.compile(r"\s+")
@@ -117,6 +117,16 @@ def english_cleaners3(text):
     text = convert_to_ascii(text)
     text = lowercase(text)
     text = expand_abbreviations(text)
+    phonemes = backend_en.phonemize([text], strip=True)[0]
+    phonemes = collapse_whitespace(phonemes)
+    return phonemes
+
+
+def catalan_cleaners(text):
+    """Pipeline for catalan text, including punctuation + stress"""
+    #text = convert_to_ascii(text)
+    text = lowercase(text)
+    #text = expand_abbreviations(text)
     phonemes = backend.phonemize([text], strip=True)[0]
     phonemes = collapse_whitespace(phonemes)
     return phonemes
